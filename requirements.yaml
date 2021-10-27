@@ -1,0 +1,19 @@
+name: m1
+dependencies:
+  - apple::tensorflow-deps
+  - black
+  - bokeh
+  - flask
+  - matplotlib
+  - nodejs
+  - numpy
+  - pandas
+  - pip
+  - pylint
+  - python
+  - scikit-learn
+  - seaborn
+  - pip:
+      - Flask-Testing
+      - tensorflow-macos
+      - tensorflow-metal
