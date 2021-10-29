@@ -4,6 +4,7 @@ dependencies:
   - black
   - bokeh
   - flask
+  - jupyter
   - matplotlib
   - nodejs
   - numpy

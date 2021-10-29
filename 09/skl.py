@@ -413,7 +413,6 @@ def crossval(heart_disease, housing_df):
             y_test, y_preds, rownames=["Actual Label"], colnames=["Predicted Label"]
         )
     )
-    figure()
     ConfusionMatrixDisplay.from_estimator(estimator=clf, X=xda, y=yda)
     ConfusionMatrixDisplay.from_predictions(y_true=y_test, y_pred=y_preds)
     print(classification_report(y_test, y_preds))
