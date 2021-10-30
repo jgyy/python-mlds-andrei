@@ -5,7 +5,9 @@ from os.path import join, dirname
 from pandas import Series, DataFrame, read_csv, crosstab
 from matplotlib.pyplot import figure, show
 
-csv = lambda x: join(dirname(__file__), x)
+file = lambda x: join(dirname(__file__), x)
+readcsv = lambda x: DataFrame(read_csv(file(x)))
+tocsv = lambda x, y, index=True: x.to_csv(file(y), index=index)
 
 
 def wrapper():
@@ -18,10 +20,10 @@ def wrapper():
     print(colours)
     car_data = DataFrame({"Car make": series, "Colour": colours})
     print(car_data)
-    car_sales = DataFrame(read_csv(csv("car-sales.csv")))
+    car_sales = readcsv("car-sales.csv")
     print(car_sales)
-    car_sales.to_csv(csv("exported-car-sales.csv"), index=False)
-    exported_car_sales = DataFrame(read_csv(csv("exported-car-sales.csv")))
+    tocsv(car_sales, "exported-car-sales.csv", False)
+    exported_car_sales = readcsv("exported-car-sales.csv")
     print(exported_car_sales)
     print(car_sales.dtypes)
     print(car_sales.columns)
@@ -93,7 +95,7 @@ def manipulate(car_sales):
     print(car_sales)
     car_sales["Make"] = car_sales["Make"].str.lower()
     print(car_sales)
-    car_sales_missing = DataFrame(read_csv(csv("car-sales-missing-data.csv")))
+    car_sales_missing = readcsv("car-sales-missing-data.csv")
     print(car_sales_missing)
     print(car_sales_missing["Odometer"].mean())
     print(car_sales_missing["Odometer"].fillna(car_sales_missing["Odometer"].mean()))
@@ -105,11 +107,11 @@ def manipulate(car_sales):
     print(car_sales_missing.dropna())
     car_sales_missing.dropna(inplace=True)
     print(car_sales_missing)
-    car_sales_missing = DataFrame(read_csv(csv("car-sales-missing-data.csv")))
+    car_sales_missing = readcsv("car-sales-missing-data.csv")
     print(car_sales_missing)
     car_sales_missing_dropped = car_sales_missing.dropna()
     print(car_sales_missing_dropped)
-    car_sales_missing_dropped.to_csv(csv("car-sales-missing-dropped.csv"))
+    tocsv(car_sales_missing_dropped, "car-sales-missing-dropped.csv")
     print(car_sales)
     seats_column = Series([5, 5, 5, 5, 5])
     car_sales["Seats"] = seats_column
